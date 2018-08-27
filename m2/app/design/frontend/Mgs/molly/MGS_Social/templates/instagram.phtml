@@ -1,0 +1,17 @@
+<?php
+	$themeHelper = $this->helper('MGS\Social\Helper\Data');
+	$user_name = $themeHelper->getUserName(); 
+	$client_id = $themeHelper->getClientId(); 
+	$number = $themeHelper->getNumber(); 
+	$width = $themeHelper->getWidth();
+	$height = $themeHelper->getHeight();
+?>
+<?php if($themeHelper->getEnable() && $user_name && $client_id && $number): ?>
+
+<div class="block-content">
+    <?php $block->getInstagramData($user_name, $client_id, $number, $width, $height); ?>
+</div>
+
+<?php else: ?>
+	<p><?php echo __('The instagram extension had disabled or no "User Name" or no "Client ID" or no "Number of Images want to show" ') ?></p>
+<?php endif; ?>

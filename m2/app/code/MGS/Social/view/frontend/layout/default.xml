@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MGS_Social::css/mgs_social.css" media="all"/>
+    </head>
+    <body>
+        <referenceBlock name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="social.login.head" template="MGS_Social::js.phtml"/>
+        </referenceBlock>
+        <referenceContainer name="header.panel">
+            <block class="MGS\Social\Block\Login\Links" name="social.login.header.links" template="MGS_Social::login/links.phtml">
+                <block class="MGS\Social\Block\Login\Links\Facebook" name="social.login.header.links.facebook" template="MGS_Social::login/links/facebook.phtml"/>
+                <block class="MGS\Social\Block\Login\Links\Google" name="social.login.header.links.google" template="MGS_Social::login/links/google.phtml"/>
+                <block class="MGS\Social\Block\Login\Links\Twitter" name="social.login.header.links.twitter" template="MGS_Social::login/links/twitter.phtml"/>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="customer.login.container">
+            <block class="MGS\Social\Block\Login\Links" name="social.login.customer.links" after="-" template="MGS_Social::login/customer/links.phtml">
+                <block class="MGS\Social\Block\Login\Links\Facebook" name="social.login.customer.links.facebook" template="MGS_Social::login/customer/links/facebook.phtml"/>
+                <block class="MGS\Social\Block\Login\Links\Google" name="social.login.customer.links.google" template="MGS_Social::login/customer/links/google.phtml"/>
+                <block class="MGS\Social\Block\Login\Links\Twitter" name="social.login.customer.links.twitter" template="MGS_Social::login/customer/links/twitter.phtml"/>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.additional">
+            <block class="Magento\Framework\View\Element\Template" name="social.facebook.page.plugin" after="-" template="MGS_Social::facebook/page-plugin/content.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="social.login.js" template="MGS_Social::login/js.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="social.facebook.page.plugin.scripts" template="MGS_Social::facebook/page-plugin/scripts.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

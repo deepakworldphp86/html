@@ -1,0 +1,49 @@
+<?php
+	$themeHelper = $this->helper('MGS\Social\Helper\Data');
+	$user_name = $themeHelper->getUserName(); 
+	$client_id = $themeHelper->getClientId(); 
+	$number = $themeHelper->getNumber(); 
+	$width = $themeHelper->getWidth();
+	$height = $themeHelper->getHeight();
+?>
+<?php if($themeHelper->getEnable()): ?>
+<div class="instagram">
+	<?php $images = $block->getWidgetInstagramData($user_name, $client_id, $number, $width, $height); ?>
+	<div class="block-title">
+		<p><?php echo $this->getTitle(); ?></p>
+	</div>
+	<div class="note-text">
+		<span><?php echo $this->getNoteText(); ?></span>
+	</div>
+	<div class="owl-carousel instagram-carousel">
+	<?php foreach($images as $image): ?>
+		<a class="item" href="<?php echo $image ?>" target="_blank"><img src="<?php echo $image ?>" alt="image" /></a>
+	<?php endforeach; ?>
+	</div>
+	<script type="text/javascript">
+		require([
+			'jquery',
+			'MGS_Mpanel/js/owl.carousel.min'
+		], function(jQuery){
+			(function($) {
+				$(".instagram-carousel").owlCarousel({
+					items: 6,
+					nav: <?php echo $this->getNav() ?>,
+					navText: ["<i class='pe-7s-left-arrow'></i>","<i class='pe-7s-right-arrow'></i>"],
+					dots: <?php echo $this->getDots() ?>,
+					autoplay: <?php echo $this->getAutoplay() ?>,
+					responsive:{
+						0 : {items: 2},
+						480 : {items: 2},
+						768 : {items: 6},
+						980 : {items: 6},
+						1200 : {items: 6}
+					}
+				});
+			})(jQuery);
+		});
+	</script>
+</div>
+<?php else: ?>
+	<p><?php echo __('The instagram extension disabled') ?></p>
+<?php endif; ?>
