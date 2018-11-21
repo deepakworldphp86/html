@@ -1,0 +1,10 @@
+<referenceBlock name="customer_account_navigation">
+    <block class="Magento\Framework\View\Element\Html\Link\Current" name="customer-account-navigation-custom-link" after="-" >
+         <arguments>
+             <argument name="label" xsi:type="string" translate="true">Custom Link Label</argument>
+             <argument name="path" xsi:type="string">custom-path</argument>
+         </arguments>
+    </block>
+</referenceBlock>
+
+<move element="customer-account-navigation-wish-list-link" destination="customer_account_navigation" after="customer-account-navigation-orders-link" />

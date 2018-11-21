@@ -1,0 +1,221 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $storeManager = $objectManager->get('\Magento\Framework\UrlInterface');
+        $mediaUrl = $this->getUrl($storeManager::URL_TYPE_MEDIA,['_secure'=>true]);
+        //echo $mediaUrl;
+      //  echo "<img src='$mediaUrl'"."'email/logo/stores/1/imgpsh_fullsize_2.png'";
+$mediaUrl = $block->getUrl('pub/media/wysiwyg');
+echo $mediaUrl;
+
+?>
+<?php echo $block->escapeHtml($mediaUrl . 'category_1.png'); ?>
+<p id="message"></p>
+<img src="<?php echo $block->getUrl($mediaUrl).'email/logo/stores/1/loader.gif'; ?>" id="loaders" style="display: none;">
+<br>
+<form name='myformtrack'>
+	<input type="text" name="orderid" placeholder="Enter OrderId">
+	<input type="text" name="email" placeholder="Enter Your email">
+	
+	<button type="button" onclick="checkUserAvailabilitys()">Click Me!</button>
+</form>   
+
+<script>
+function checkUserAvailabilitys() {
+    jQuery('#loaders').show();
+    var form = document.myformtrack;
+    var urlWcsp = '<?php echo $block->getUrl('excellence/hello/trackorders'); ?>';
+  //alert(urlWcsp);
+var dataString = jQuery(form).serialize();
+jQuery.ajax( {
+    type: 'POST',
+    url: urlWcsp,
+    //data: { foton : jQuery('input:checkbox:checked').push(this).val()},
+         data: dataString,
+    success: function(data) {
+      jQuery('#loaders').hide();
+      jQuery('#message').html(data);
+  //  console.log(data);
+
+    }
+} );
+}
+</script>
+
+<?php echo $this->getLayout()->createBlock("Magento\Reports\Block\Product\Widget\Viewed")->setDisplayType("recently.view.products")
+            ->setProductsCount("10")->setTemplate("widget/viewed/content/viewed_list.phtml")->toHtml();   ?>
+
+<br>
+<?php
+echo $this->helper('Excellence\Hello\Helper\Data')->randomFunc();
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo $this->helper('Excellence\Hello\Helper\Data')->randomsFunc();
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo $this->helper('Excellence\Hello\Helper\Data')->bannerSlide();
+
+
+
+
+
+
+
+
+
+
+/*$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+ 
+// get the list of all categories
+$categoryCollection = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Category\CollectionFactory');
+$categories = $categoryCollection->create();
+$categories->addAttributeToSelect('*');
+  
+foreach ($categories as $category) {
+    //echo $category->getId() . '<br />';
+    
+    $furls = $category->getUrl();
+    echo "<a href='$furls'>" . $category->getName() . '</a>';
+    echo " | ";
+}*/
+
+
+// get current store’s categories 
+/*$categoryHelper = $objectManager->get('\Magento\Catalog\Helper\Category');
+$categories = $categoryHelper->getStoreCategories();
+
+foreach ($categories as $category) {
+    $surl = $category->getUrl();
+    echo "<a href='$surl'>" . $category->getName() . '</a><br />';
+}*/
+
+?>
+
+<!-- <?php
+//product by collection
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+$productCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
+
+$collection = $productCollection->create()
+            ->addAttributeToSelect('*')
+            ->load();
+
+foreach ($collection as $product){
+    echo 'Name  =  '.$product->getName().'<br>';
+}  
+
+?> -->
+
+<!-- {{block class="Magento\Newsletter\Block\Subscribe" name="home.form.subscribe" template="Magento_Newsletter::subscribe.phtml"}} -->
+
+
+
+yiqwiqw
+
+<?php
+$oid = 000000003;
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$order = $objectManager->create('Magento\Sales\Model\Order')->load($oid);
+$email = $order->getCustomerEmail();
+echo $email;
+
+?>
+<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Newsletter::subscribe.phtml")->toHtml();?>
+<?php
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$context = $om->get('Magento\Framework\App\Http\Context');
+$isLoggedIn = $context->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
+//echo $isLoggedIn;
+if($isLoggedIn)
+{
+    echo "Is logged in";
+}
+else
+{
+    echo "Is not logged in";
+}
+?>
+
+<form name="myformnews">
+    <input type="email" name="email" >
+   <button type="button" onclick="checkUserAvail()">Click Me!</button>
+</form>
+
+<p id="messages"></p>
+<img src="<?php echo $block->getUrl($mediaUrl).'email/logo/stores/1/loader.gif'; ?>" id="loader" style="display: none;">
+<br>
+
+<script>
+function checkUserAvail() {
+    jQuery('#loader').show();
+    var form = document.myformnews;
+    var urls = '<?php echo $block->getUrl('excellence/hello/newsletter'); ?>';
+  //alert(urlWcsp);
+var dataString = jQuery(form).serialize();
+jQuery.ajax( {
+    type: 'POST',
+    url: urls,
+    //data: { foton : jQuery('input:checkbox:checked').push(this).val()},
+         data: dataString,
+    success: function(data) {
+      jQuery('#loader').hide();
+      jQuery('#messages').html(data);
+    console.log(data);
+
+    }
+} );
+}
+</script>
+
+<?php echo $this->getLayout()->createBlock("Magento\Framework\View\Element\Template")->setTemplate("Magento_Newsletter::subscribe.phtml")->toHtml();?>
+
+
+<script type="text/javascript"> 
+require(['domReady!','jquery','Magento_Ui/js/modal/modal'],function(domReady,$,modal) { 
+//require(['jquery', 'jquery/ui'], function($) { 
+  
+  var popup = modal(options, $('#custom_popup'));
+            $("#checkout-button").on('click',function(){ 
+                $("#custom_popup").modal('openModal');
+            });
+});  
+
+</script>
+ <div id="checkout-button">Click</div>
+<div id="custom_popup" style="display:none;">
+    <div class="youtube-video">
+        <iframe width="854" height="480" src="https://www.youtube.com/embed/UKlkIzD-Yj8" frameborder="0" allowfullscreen></iframe>
+    </div>
+     <?php // echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('terms-conditions')->toHtml();?>
+    <fieldset class="fieldset">
+        <div class="field">
+            <label for="terms" class="label"><span><?php echo $this->escapeHtml(__('I have read the terms and conditions')); ?></span></label>
+            <div class="control">
+                <input type="checkbox" name="checkbox" id="checkbox" class="checkbox" title="<?php echo $this->escapeHtml(__('Terms')); ?>">
+            </div>
+        </div>
+    </fieldset> 
+</div>
+
+
+
+
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div class="w3-container">
+  <h2>W3.CSS Modal</h2>
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Open Modal</button>
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+        <div class="youtube-video">
+        <iframe width="854" height="480" src="https://www.youtube.com/embed/UKlkIzD-Yj8" frameborder="0" allowfullscreen></iframe>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>

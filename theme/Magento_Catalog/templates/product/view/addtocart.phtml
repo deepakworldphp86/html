@@ -1,0 +1,133 @@
+<?php 
+$sk = $this->helper('Magento\Catalog\Helper\Output')->productAttribute($block->getProduct(), $block->getProduct()->getPrice(), 'price');
+$sky = $this->helper('Magento\Catalog\Helper\Output')->productAttribute($block->getProduct(), $block->getProduct()->getSpecialPrice(), 'specialprice');
+if(!empty($sky) && (!empty($sk)))
+{
+  $sy = number_format(($sk - $sky) * 100 / $sk);
+  echo "<b>".$sy."% Off</b><br/>";
+}
+?>
+
+
+
+
+<?php
+
+/* $product = $this->_productFactory->create()->load($abc);
+  $cats = $product->getCategoryIds();
+  if(count($cats) ){
+    $firstCategoryId = $cats[0];
+    $_category = $this->_categoryFactory->create()->load($firstCategoryId);
+    echo $_category->getName();
+}
+*/
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+$categories = $product->getCategoryIds(); /*will return category ids array*/
+foreach($categories as $category){
+    $cat = $objectManager->create('Magento\Catalog\Model\Category')->load($category);
+    echo $cat->getName();
+    }
+    
+?>
+<?= /* @escapeNotVerified */ $this->helper('Magento\Catalog\Helper\Output')->productAttribute($block->getProduct(), $block->getProduct()->getShortDescription(), 'shortdescription') ?>
+
+<?= /* @escapeNotVerified */ $this->helper('Magento\Catalog\Helper\Output')->productAttribute($block->getProduct(), $block->getProduct()->getSku(), 'sku') ?>
+
+
+<?php echo "hadvahdhad ahkdvakh"; ?>
+
+
+
+<?php echo $this->helper('Embitel\Bannerslide\Helper\Data')->isEnable();?>
+
+
+
+
+
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()): ?>
+<div class="box-tocart">
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()): ?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></label>
+            <div class="control">
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       value="<?= /* @escapeNotVerified */ $block->getProductDefaultQty() * 1 ?>"
+                       title="<?= /* @escapeNotVerified */ __('Qty-emb') ?>"
+                       class="input-text qty"
+                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+            </div>
+            </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="submit"
+                    title="<?= /* @escapeNotVerified */ $buttonTitle ?>"
+                    class="action primary tocart"
+                    id="product-addtocart-button">
+                <span><?= /* @escapeNotVerified */ $buttonTitle ?></span>
+            </button>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+    <h3><?php 
+    $code = 'style_bottom';
+echo $block->getProductAttributeByCode($code); 
+
+$codes= 'style_general';
+echo $block->getProductAttributeByCode($codes); 
+?></h3>
+</div>
+<?php endif; ?>
+<?php if ($block->isRedirectToCartEnabled()) : ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/product/view/validation": {
+                "radioCheckboxClosest": ".nested"
+            }
+        }
+    }
+</script>
+<?php else : ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>
+<?php endif; ?>
+
+<!-- 
+<input type="text" class="input-text required-entry" id="datecalendar" name="datecalendar" aria-required="true" >
+
+
+<script>
+require([
+"jquery",
+"mage/calendar"
+], function($){
+$("#datecalendar").calendar({
+buttonText:"<?php echo __('Select Date') ?>",
+});
+});
+</script> -->
+
+<?php 
+echo $this->helper('Excellence\Hello\Helper\Data')->randomssFunc();
+?>

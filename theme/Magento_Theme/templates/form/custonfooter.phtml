@@ -1,0 +1,66 @@
+<?php echo __('This is test custom block.'); ?><br><br>
+<?php echo __('This is test custom block.'); ?><br><br>
+<?php echo __('This is test custom block.'); ?><br><br>
+<?php echo __('This is test custom block.'); ?><br><br>
+<?php echo __('This is test custom block.'); ?><br><br>
+<?php echo __('This is test custom block.'); ?><br><br>
+<?php echo __('This is test custom block.'); ?><br><br>
+<?php echo __('This is test custom block.'); ?><br><br>
+<?php echo __('This is test custom block.'); ?><br><br>
+<?php echo __('This is test custom block.'); ?><br><br>
+
+<?php echo __('myfootext for loggin.'); ?>
+
+<?php
+$om = \Magento\Framework\App\ObjectManager::getInstance();
+$context = $om->get('Magento\Framework\App\Http\Context');
+$isLoggedIn = $context->getValue(\Magento\Customer\Model\Context::CONTEXT_AUTH);
+//echo $isLoggedIn;
+if($isLoggedIn)
+{
+	echo "Is logged in";
+}
+else
+{
+	echo "Is not logged in";
+}
+
+echo "<br><br>";
+
+//$this->helper('Embitel\Catalog\Helper\Data')->getCurrentProduct(); ?
+
+$a = $this->helper('Embitel\Reasonforcancel\Helper\Detailsdata')->getcategoryCollections();
+$b = $this->helper('Embitel\Reasonforcancel\Helper\Detailsdata')->getreasonCollections();
+
+$allcategory = rtrim($a,',');
+echo $allcategory;
+echo "<br><br>";
+
+$reasons = '';
+foreach ($b as $key ) {
+	//echo $key['title'];
+	$reasons .= $key['author'];
+}
+echo $reasons;
+$expStr = explode(',', $reasons);
+$str2 = $allcategory;
+$expStr2 = explode(',', $str2);
+
+$finalArr =[];
+foreach($expStr as $str){
+
+    if(in_array($str, $expStr2)){
+        $finalArr[] = $str;
+    }
+}
+$mycount = $str;
+echo "<br><br>";
+echo $mycount;
+
+
+
+/*$b = $this->helper('Embitel\Reasonforcancel\Helper\DetailsData')->_getCollection();
+var_dump($b);	*/
+	
+
+?>

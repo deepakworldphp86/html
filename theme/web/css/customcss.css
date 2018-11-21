@@ -1,0 +1,13 @@
+.action-auth-toggle
+{
+display: block;
+}
+.page-layout-1column .block.widget .products-grid .product-item:nth-child(5n + 1)
+{
+	    margin-left: -15px;
+}
+.logo
+{
+	width: 200px;
+	height: 50px;
+}
